@@ -1,0 +1,44 @@
+
+version = "0.2.0" # vampires_dpp version
+
+name = "20220224_ABAur" # simple name for analysis, used for automatic naming of some files
+target = "AB Aur"
+directory = "/Volumes/mlucas SSD1/abaur_20220224_old/"
+output_directory = "/Volumes/mlucas SSD1/abaur_20220224_old/processed" # path to output directory
+filenames = "ABAur_*_cam[12].fits"
+frame_centers = [[128, 128], [128, 129]] # cam 1, cam 2 centers (x, y)
+
+# [astrometry]
+
+[coronagraph]
+mask_size = 55 # IWA of mask, mas
+
+[coronagraph.satellite_spots]
+radius = 31.8 # radius of satellite spots in lam/D
+
+[calibration]
+output_directory = "calibrated"
+deinterleave = true # deinterleave FLC states
+
+[calibration.darks]
+filenames = [
+    "darks_250ms_300em_750-50_Mirror_2_cam1.fits",
+    "darks_250ms_300em_750-50_Mirror_2_cam2.fits",
+] # list of filenames, the path to a textfile with names, or a python glob expression
+
+[registration]
+method = "com"
+output_directory = "registered"
+
+[collapsing]
+output_directory = "collapsed"
+
+[derotate]
+output_directory = "derotated"
+
+[polarimetry]
+method="triplediff"
+force=true
+
+[polarimetry.ip]
+radius = 8

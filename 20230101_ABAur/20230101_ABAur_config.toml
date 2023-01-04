@@ -1,0 +1,42 @@
+version = "0.2.0" # vampires_dpp version
+
+name = "20230101_ABAur" # simple name for analysis, used for automatic naming of some files
+target = "AB Aur" # SIMBAD compatible target name, optional
+directory = "/Volumes/mlucas SSD1/2023/20230101" # absolute path of root data directory
+output_directory = "/Volumes/mlucas SSD1/2023/20230101/abaur_processed" # absolute path to top-level output directory, if empty will use the root directory
+filenames = "ABAur_*750-50*" # list of filenames, the path to a textfile with names, or a python glob expression
+frame_centers = [[257, 256], [257, 256]] # optional cam 1, cam 2 centers (x, y) from visual inspection
+
+[coronagraph] # optional, signifies coronagraph was used
+mask_size = 55 # IWA of mask, mas
+
+[coronagraph.satellite_spots] # optional
+radius = 11.8 # radius of satellite spots in lam/D
+angle = -4 # angle offset of satellite spots in degrees, -4 is default
+
+[calibration]
+output_directory = "calibrated" # output directory, relative to root output directory, if empty will use same directory as files
+deinterleave = true # deinterleave FLC states for polarimetric data downloaded directly from VAMPIRES computer
+
+[calibration.darks]
+filenames = [
+    "skies_100ms_em300_750-50_LyotStop_002_cam1.fits",
+    "skies_100ms_em300_750-50_LyotStop_002_cam2.fits",
+]
+
+[registration]
+method = "com"
+output_directory = "registered" # output directory for measured offsets and intermediate frames
+
+[collapsing]
+output_directory = "collapsed" # output directory for intermediate frames
+
+[derotate]
+output_directory = "derotated" # output directory for intermediate frames
+
+[polarimetry]
+method="triplediff"
+force = true
+
+[polarimetry.ip]
+radius = 5 # radius of photometric aperture to measure IP from

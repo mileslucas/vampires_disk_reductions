@@ -1,0 +1,35 @@
+version = "0.2.0" # vampires_dpp version
+
+name = "20230102_MWC789_2" # simple name for analysis, used for automatic naming of some files
+target = "MWC 789" # SIMBAD compatible target name, optional
+directory = "/Volumes/mlucas SSD1/2023/20230102" # absolute path of root data directory
+output_directory = "/Volumes/mlucas SSD1/2023/20230102/mwc789_processed" # absolute path to top-level output directory, if empty will use the root directory
+filenames = "MWC789_0[4|6]*.fits" # list of filenames, the path to a textfile with names, or a python glob expression
+frame_centers = [[257, 259], [257, 259]] # optional cam 1, cam 2 centers (x, y) from visual inspection
+
+[calibration]
+output_directory = "calibrated" # output directory, relative to root output directory, if empty will use same directory as files
+deinterleave = true # deinterleave FLC states for polarimetric data downloaded directly from VAMPIRES computer
+
+[calibration.darks]
+filenames = [
+    "skies_50ms_em300_00_750-50_EmptySlot_000_cam1.fits",
+    "skies_50ms_em300_00_750-50_EmptySlot_000_cam2.fits",
+]
+
+[registration]
+method = "com"
+output_directory = "registered" # output directory for measured offsets and intermediate frames
+
+[collapsing]
+output_directory = "collapsed" # output directory for intermediate frames
+
+[derotate]
+output_directory = "derotated" # output directory for intermediate frames
+
+[polarimetry]
+method = "triplediff" # calibration method, one of "mueller" or "triplediff"
+force = true
+
+[polarimetry.ip]
+radius = 5 # radius of photometric aperture to measure IP from

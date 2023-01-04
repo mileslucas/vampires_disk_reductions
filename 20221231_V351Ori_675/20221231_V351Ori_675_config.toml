@@ -1,0 +1,39 @@
+version = "0.2.0" # vampires_dpp version
+
+name = "20221231_V351Ori_675"
+target = "V351 Ori"
+directory = "/Volumes/mlucas SSD1/2022/20221231"
+output_directory = "/Volumes/mlucas SSD1/2022/20221231/20221231_V351Ori_675/processed"
+filenames = "V351Ori_0[012]_*_675-50_*.fits"
+frame_centers = [[133, 123], [131, 122]] # cam 1, cam 2 centers (x, y)
+
+[calibration]
+output_directory = "calibrated"
+deinterleave = true
+
+[calibration.darks]
+filenames = [
+    "skies_10ms_em300_00_675-50_EmptySlot_000_cam1.fits",
+    "skies_10ms_em300_00_675-50_EmptySlot_000_cam2.fits",
+]
+
+[frame_selection]
+output_directory = "selected"
+q = 0.3
+
+[registration]
+method = "com"
+output_directory = "registered"
+
+[collapsing]
+output_directory = "collapsed"
+
+[derotate]
+output_directory = "derotated"
+
+[polarimetry]
+method = "triplediff"
+force = true
+
+[polarimetry.ip]
+radius = 3 # radius of circular aperture

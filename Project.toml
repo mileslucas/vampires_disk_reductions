@@ -1,0 +1,6 @@
+[deps]
+ADI = "904a6c7d-4c1b-562f-9573-ab2e7e1c7946"
+AstroImages = "fe3fc30c-9b16-11e9-1c73-17dabf39f4ad"
+FITSIO = "525bcba6-941b-5504-bd06-fd0dc1a4d2eb"
+FileIO = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
+SAOImageDS9 = "dbce9b26-8eb4-4825-964b-d4940cf8daff"

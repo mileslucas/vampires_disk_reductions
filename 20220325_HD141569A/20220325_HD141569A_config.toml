@@ -1,0 +1,44 @@
+
+version = "0.2.0" # vampires_dpp version
+
+name = "20220325_HD141569A" # simple name for analysis, used for automatic naming of some files
+target = "HD 141569A"
+directory = "/Volumes/mlucas SSD1/hd141569a_20220325/"
+output_directory = "/Volumes/mlucas SSD1/hd141569a_20220325/processed" # path to output directory
+filenames = "./20220325_HD141569A_filelist.txt"
+frame_centers = [[128, 128], [128, 129]] # cam 1, cam 2 centers (x, y)
+
+# [astrometry]
+
+[coronagraph]
+mask_size = 55 # IWA of mask, mas
+
+[coronagraph.satellite_spots]
+radius = 15.2 # radius of satellite spots in lam/D
+
+[calibration]
+output_directory = "calibrated"
+deinterleave = true # deinterleave FLC states
+
+[calibration.darks]
+filenames = [
+    "VMPA00025371.fits",
+    "VMPA00025373.fits",
+] # list of filenames, the path to a textfile with names, or a python glob expression
+
+[registration]
+method = "com"
+output_directory = "registered"
+
+[collapsing]
+output_directory = "collapsed"
+
+[derotate]
+output_directory = "derotated"
+
+[polarimetry]
+method="triplediff"
+force=true
+
+[polarimetry.ip]
+radius = 8

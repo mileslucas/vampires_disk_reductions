@@ -1,0 +1,35 @@
+version = "0.2.0" # vampires_dpp version
+
+name = "20221230_PDS4"
+target = "PDS 4"
+directory = "/Volumes/mlucas SSD1/2022/20221230"
+output_directory = "/Volumes/mlucas SSD1/2022/20221230/20221230_PDS4/processed"
+filenames = "PDS4*.fits"
+frame_centers = [[130, 128], [130, 128]] # cam 1, cam 2 centers (x, y)
+
+[calibration]
+output_directory = "calibrated"
+deinterleave = true
+
+[calibration.darks]
+filenames = [
+    "skies_100ms_em300_00_750-50_EmptySlot_000_cam1.fits",
+    "skies_100ms_em300_00_750-50_EmptySlot_000_cam2.fits",
+]
+
+[registration]
+method = "com"
+output_directory = "registered"
+
+[collapsing]
+output_directory = "collapsed"
+
+[derotate]
+output_directory = "derotated"
+
+[polarimetry]
+method = "triplediff"
+force = true
+
+[polarimetry.ip]
+radius = 3 # radius of circular aperture

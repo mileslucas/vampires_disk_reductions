@@ -1,0 +1,44 @@
+
+version = "0.2.0" # vampires_dpp version
+
+name = "20220225_HD32297" # simple name for analysis, used for automatic naming of some files
+target = "HD 32297"
+directory = "/Volumes/mlucas SSD1/hd32297_20220225/"
+output_directory = "/Volumes/mlucas SSD1/hd32297_20220225/processed" # path to output directory
+filenames = "HD32297_*_cam[12].fits"
+frame_centers = [[260, 261], [260, 260]] # cam 1, cam 2 centers (x, y)
+
+
+[coronagraph]
+mask_size = 55 # IWA of mask, mas
+
+[coronagraph.satellite_spots]
+radius = 31.8 # radius of satellite spots in lam/D
+
+[calibration]
+output_directory = "calibrated"
+deinterleave = true # deinterleave FLC states
+
+[calibration.darks]
+filenames = [
+    "dark_300em_500ms_750-50_Mirror_0_cam1.fits",
+    "dark_300em_500ms_750-50_Mirror_0_cam2.fits",
+] # list of filenames, the path to a textfile with names, or a python glob expression
+
+[registration]
+method = "com"
+window_size = 30 # window size to measure offsets from
+output_directory = "registered"
+
+[collapsing]
+output_directory = "collapsed"
+
+[derotate]
+output_directory = "derotated"
+
+[polarimetry]
+method = "triplediff"
+force=true
+
+[polarimetry.ip]
+radius = 5
